@@ -1,13 +1,20 @@
+require "pry"
+
 namespace :poll do
   desc "TODO"
   task tweets: :environment do
       client = Twitter::REST::Client.new do |config|
-        config.consumer_key        = "Q20s4Ywn4dvDhL9MbUxnlMbVgY"
-        config.consumer_secret     = "cHeN0vuz9RHjbrlaNsSw1rdnhsPl1pB6uejuRextj4POcwFaIx"
-        config.access_token        = "2879734690-9kB46HnGy9B93KHqpw6V1rVbP2tlvacByqeiE7"
-        config.access_token_secret = "f6wfoDDYjHuhtHyeZjWcd7o2mxQ3iJ8EqhBZedMXW80pp"
-  
+        config.consumer_key        = ENV["CONSUMER_KEY"]
+        config.consumer_secret     = ENV["CONSUMER_SECRET"]
+        config.access_token        = ENV["ACCESS_TOKEN"]
+        config.access_token_secret = ENV["ACCESS_SECRET"]
     end
+
+    client.search("to:justinbieber marry me", result_type: "recent").take(1).collect do |tweet|
+      ap "#{tweet.user.screen_name}: #{tweet.text}"
+
   end
 
+  binding.pry
+end
 end

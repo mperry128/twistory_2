@@ -1,0 +1,46 @@
+<!-- Validation failure messages -->
+<% if @tweet.errors.any? %>
+  <% @tweet.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Tweet</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_tweet" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for tweet_comments -->
+      <div class="form-group">
+        <label for="tweet_comments" class="control-label">
+          Tweet comments
+        </label>
+
+        <input type="text" id="tweet_comments" name="tweet_comments" placeholder="Tweet comments" class="form-control" value="<%= @tweet.tweet_comments %>">
+      </div>
+
+      <!-- Label and input for tweet_likes -->
+      <div class="form-group">
+        <label for="tweet_likes" class="control-label">
+          Tweet likes
+        </label>
+
+        <input type="text" id="tweet_likes" name="tweet_likes" placeholder="Tweet likes" class="form-control" value="<%= @tweet.tweet_likes %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Tweet
+      </button>
+      or
+      <a href="/tweets">Cancel</a>
+    </form>
+  </div>
+</div>

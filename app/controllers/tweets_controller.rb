@@ -1,8 +1,16 @@
 class TweetsController < ApplicationController
   def index
-    @tweets = client.status(27558893223)
+    @tweet = Tweet.new
+
+    @tweet.tweet_comments = params[:tweet_comments]
+    @tweet.tweet_likes = params[:tweet_likes]
+
+    save_status = @tweet.save
+
 
     render("tweets/index.html.erb")
+
+
   end
 
   def show
@@ -14,6 +22,7 @@ class TweetsController < ApplicationController
 
   def new
     @tweet = Tweet.new
+
 
     render("tweets/new.html.erb")
   end

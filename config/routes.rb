@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # CREATE
   get "/comments/new", :controller => "comments", :action => "new"
   post "/create_comment", :controller => "comments", :action => "create"
+  post "/quick_create", :controller=> "comments", :action=>"quick_create"
 
   # READ
   get "/comments", :controller => "comments", :action => "index"
@@ -51,6 +52,40 @@ Rails.application.routes.draw do
 
   # DELETE
   get "/delete_tweet/:id", :controller => "tweets", :action => "destroy"
+  #------------------------------
+
+  # Routes for the Users resource:
+  # CREATE
+
+  # READ
+  get "/users", :controller => "users", :action => "index"
+  get "/users/:id", :controller => "users", :action => "show"
+
+  # UPDATE
+  get "/users/:id/edit", :controller => "users", :action => "edit"
+  post "/update_users/:id", :controller => "users", :action => "update"
+
+  # DELETE
+  get "/delete_user/:id", :controller => "users", :action => "destroy"
+  #------------------------------
+
+  # Routes for the My Likes resource:
+  # CREATE
+  post "/quick_like", :controller=> "my_likes", :action=>"quick_like"
+  # get "/likes/new", :controller => "likes", :action => "new"
+  # post "/create_like", :controller => "likes", :action => "create"
+
+  # READ
+  get "/my_likes", :controller => "my_likes", :action => "index"
+  get "/my_likes/:id", :controller => "my_likes", :action => "show"
+
+  # UPDATE
+  get "/my_likes/:id/edit", :controller => "my_likes", :action => "edit"
+  post "/update_my_like/:id", :controller => "my_likes", :action => "update"
+
+  # DELETE
+  get "/delete_my_like/:id", :controller => "my_likes", :action => "destroy"
+  get "/delete_like", :controller=>"my_likes", :action=>"quick_destroy"
   #------------------------------
 
 

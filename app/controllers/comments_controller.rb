@@ -23,6 +23,9 @@ class CommentsController < ApplicationController
     @comment.tweet_id = params[:tweet_id]
     @comment.user_id = params[:user_id]
 
+    @comment.body = params[:body]
+  
+
     save_status = @comment.save
 
     if save_status == true
@@ -64,4 +67,20 @@ class CommentsController < ApplicationController
       redirect_to(:back, :notice => "Comment deleted.")
     end
   end
+
+  def quick_create
+      @comment = Comment.new
+
+      @comment.tweet_id = params[:tweet_id]
+      @comment.body = params[:body]
+      @comment.user_id = params[:user_id]
+
+      save_status = @comment.save
+
+      if save_status == true
+        redirect_to("/tweets", :notice => "Comment created successfully.")
+      else
+        render("comments/new.html.erb")
+      end
+    end
 end
